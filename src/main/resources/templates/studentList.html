@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Students Information</title>
+    </head>
+    <body>
+    <h1>Students Information</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Score</th>
+        </tr>
+        <tr th:each="student:${students}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.score}"></td>
+        </tr>
+    </table>
+
+    </body>
+</html>

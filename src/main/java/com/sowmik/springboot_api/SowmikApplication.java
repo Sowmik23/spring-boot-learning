@@ -64,5 +64,18 @@ Section 10: Health Checks and Metrics
     now test the above url's links
 
 
+Section 11: Spring Security
+    - add spring-boot-starter-security in pom.xml then spring boot will automatically add security.
+    - then for login use username: user and password will be printed in log info.
+
+
+
+Section 12: Thymeleaf
+        - add spring-boot-starter-thymeleaf in pom.xml.
+        - sending data (see HelloController.java)
+        - sending object data (see HelloController.java)
+
+
+
  */
 
