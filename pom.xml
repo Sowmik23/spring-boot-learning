@@ -108,6 +108,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!--ActiveMQ for messaging-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+         </dependency>
+
+
+        <!--Dependency for swagger and swagger-ui in one dependency-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

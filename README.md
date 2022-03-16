@@ -1,62 +1,37 @@
-package com.sowmik.springboot_api;
+Section 0: Basics
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.jms.annotation.EnableJms;
-
-@SpringBootApplication
-@EnableCaching
-@EnableBatchProcessing
-@EnableJms
-@OpenAPIDefinition(info = @Info(title = "Test api for learing", version = "1.1."))
-public class SowmikApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(SowmikApplication.class, args);
-
-    }
-
-}
-
-
-// Topics:
-
-/*
-Section--: Basics
         - Inversion of Control
         - Dependency Injection
 
-Section 5: Spring Data JPA
+Section 1: Spring Data JPA
+
         - Adding JPA dependency
         - Creating Model and Repository
         - Testing
         - Show SQL
 
-Section 6: Create REST CRUD API
+Section 2: Create REST CRUD API
+
         - getAllProducts()
         - getProduct()
         - createProduct()
         - deleteProduct()
 
 
-Section 7: Creating a REST Client
+Section 3: Creating a REST Client
+
         - integration test @Test
 
 
-Section 8: Profiles
+Section 4: Profiles
+
         - dev profile
         - testing profile
         - activate profile
         - activate profile through VM
 
-9. How to use Logging/logger?
+    9. How to use Logging/logger?
+
         - see productRestController: here in getProductById we implemented that.
 
         - By default all logs are shown in console but how can we save these logs in a file?
@@ -67,9 +42,10 @@ Section 8: Profiles
         - SEE ProductRestController, where I set logger for specific action.
         - see application.properties
 
-    TODO: LOG-BACK PATTERN
+        TODO: LOG-BACK PATTERN
 
-Section 10: Health Checks and Metrics
+Section 5: Health Checks and Metrics
+
         - How to know our application is ready for production?
         => It includes(Health checks, Application configuration, Application metrics, Key application events)
         ---> All is we need to do, enable Spring Boot Actuators for our project in pom.xml.
@@ -80,7 +56,7 @@ Section 10: Health Checks and Metrics
         - http://localhost:8090/api/actuator
 
 
- ==> Expose out more information about health of our application
+     ==> Expose out more information about health of our application
         - just add this line in application.properties
         -> management.endpoint.health.show-details=always
         - and now see all the details here: http://localhost:8090/api/actuator/health
@@ -105,19 +81,23 @@ Section 10: Health Checks and Metrics
         now test the above url's links
 
 
-Section 11: Spring Security
+Section 6: Spring Security
+
         - add spring-boot-starter-security in pom.xml then spring boot will automatically add security.
         - then for login use username: user and password will be printed in log info.
-TODO: JWT-AUTHENTICATION IMPLEMENT
+        
+        TODO: JWT-AUTHENTICATION IMPLEMENT
 
 
-Section 12: Thymeleaf
+Section 7: Thymeleaf
+
         - add spring-boot-starter-thymeleaf in pom.xml.
         - sending data (see HelloController.java)
         - sending object data (see HelloController.java)
 
 
-Section 13: Database Caching
+Section 8: Database Caching
+
         - Spring boot uses third party cash providers like Hazel cast, EH cache, JBoss cache. Hazel cast is most popular.
         - add spring-boot-starter-cache in pom.xml
         - create ProductCacheConfig
@@ -128,7 +108,8 @@ Section 13: Database Caching
         TODO: TEST CACHING...
 
 
-Section 14: Spring Batch
+Section 9: Spring Batch
+
         - A Batch is a bunch of task
         - in properties file add:
 
@@ -145,7 +126,8 @@ Section 14: Spring Batch
         //https://stackoverflow.com/questions/36263965/processing-a-large-file-using-spring-batch
 
 
-Section 15: Unit Testing using MockMvc
+Section 10: Unit Testing using MockMvc
+
         - Mockito
         - ProductRestControllerMvcUnitTest
 
@@ -153,7 +135,8 @@ Section 15: Unit Testing using MockMvc
         TODO: HOW TO MANAGE VERSION COMPATIBILITY FOR DIFFERENT THIRD PARTY LIBRARIES IN SPRING BOOT (POM.XML)
 
 
-Section 16: Messaging and Spring JMS
+Section 11: Messaging and Spring JMS
+
         - Install ActiveMQ on you pc and start listening...
         - in pom.xml add
          <dependency>
@@ -172,7 +155,8 @@ Section 16: Messaging and Spring JMS
             spring.activemq.password=admin
 
 
-Section 17: Swagger REST Documentation Quickstart
+Section 12: Swagger REST Documentation Quickstart
+
         - add dependeny in pom.xml
             <!--Dependency for swagger and swagger-ui in one dependency-->
         <dependency>
@@ -192,6 +176,3 @@ Section 17: Swagger REST Documentation Quickstart
         - use @OpenAPIDefinition  in man method
 
         -
-
- */
-

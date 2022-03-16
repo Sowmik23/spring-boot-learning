@@ -3,6 +3,7 @@ package com.sowmik.springboot_api;
 import com.sowmik.springboot_api.data_jpa.entities.Product;
 import com.sowmik.springboot_api.data_jpa.entities.Student;
 import com.sowmik.springboot_api.data_jpa.repository.StudentRepository;
+import com.sowmik.springboot_api.messaging.MessageSender;
 import com.sowmik.springboot_api.services.PaymentService;
 import com.sowmik.springboot_api.services.PaymentServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -123,6 +124,16 @@ class SowmikApplicationTests {
     public void testBatchConfigCSV() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
         launcher.run(job, jobParameters);
+    }
+
+
+//    Test JMS messaging
+    @Autowired
+    MessageSender sender;
+
+    @Test
+    public void testSendAndReceiveJMSMessaging(){
+        sender.send("Hello Spring JMS!");
     }
 
 
