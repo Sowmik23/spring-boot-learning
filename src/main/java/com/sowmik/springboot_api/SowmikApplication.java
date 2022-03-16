@@ -1,13 +1,21 @@
 package com.sowmik.springboot_api;
 
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
+@EnableCaching
+@EnableBatchProcessing
 public class SowmikApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SowmikApplication.class, args);
+
     }
 
 }
@@ -15,65 +23,104 @@ public class SowmikApplication {
 
 // Topics:
 
-
-
 /*
 
 9. How to use Logging/logger?
-    - see productRestController: here in getProductById we implemented that.
+        - see productRestController: here in getProductById we implemented that.
 
-    - By default all logs are shown in console but how can we save these logs in a file?
-    - set logging.file=logs/application.log
+        - By default all logs are shown in console but how can we save these logs in a file?
+        - set logging.file=logs/application.log
 
-    - How to control log level(debug, error, fatal, info, off, trace, warn)?
-    - set logging.level.root=error (suppose we want to see only errors)
+        - How to control log level(debug, error, fatal, info, off, trace, warn)?
+        - set logging.level.root=error (suppose we want to see only errors)
+        - SEE ProductRestController, where I set logger for specific action.
+        - see application.properties
+
+    TODO: LOG-BACK PATTERN
 
 Section 10: Health Checks and Metrics
-    - How to know our application is ready for production?
-    => It includes(Health checks, Application configuration, Application metrics, Key application events)
-    ---> All is we need to do, enable Spring Boot Actuators for our project in pom.xml.
-    - Once we do that, spring boot will expose out several restful endpoints using which we can access the health
-    and metrics for our application.
+        - How to know our application is ready for production?
+        => It includes(Health checks, Application configuration, Application metrics, Key application events)
+        ---> All is we need to do, enable Spring Boot Actuators for our project in pom.xml.
+        - Once we do that, spring boot will expose out several restful endpoints using which we can access the health
+        and metrics for our application.
 
-    ===> To see all the health related information/all the health related endpoint/actuator related endpoint see
-    - http://localhost:8090/api/actuator
+        ===> To see all the health related information/all the health related endpoint/actuator related endpoint see
+        - http://localhost:8090/api/actuator
 
 
  ==> Expose out more information about health of our application
-    - just add this line in application.properties
-    -> management.endpoint.health.show-details=always
-    - and now see all the details here: http://localhost:8090/api/actuator/health
+        - just add this line in application.properties
+        -> management.endpoint.health.show-details=always
+        - and now see all the details here: http://localhost:8090/api/actuator/health
 
-    +How to add build related info of the project?
-    => go to pom.xml and in plugin section add this:
-    <executions>
-        <execution>
-            <goals>
-                <goal>build-info</goal>
-            </goals>
-        </execution>
-    </executions>
+        +How to add build related info of the project?
+        => go to pom.xml and in plugin section add this:
+        <executions>
+            <execution>
+                <goals>
+                    <goal>build-info</goal>
+                </goals>
+            </execution>
+        </executions>
 
-    see more info related to project health in this link:
-    http://localhost:8090/api/actuator/info/
+        see more info related to project health in this link:
+        http://localhost:8090/api/actuator/info/
 
-    => maybe you can not access build info using above url . TO see info you need to add below line in application.properties
-    => management.endpoints.web.exposure.include=*
+        => maybe you can not access build info using above url . TO see info you need to add below line in application.properties
+        => management.endpoints.web.exposure.include=*
 
-    - you can now see all the endpoints of actuator : here: http://localhost:8090/api/actuator/
-    now test the above url's links
+        - you can now see all the endpoints of actuator : here: http://localhost:8090/api/actuator/
+        now test the above url's links
 
 
 Section 11: Spring Security
-    - add spring-boot-starter-security in pom.xml then spring boot will automatically add security.
-    - then for login use username: user and password will be printed in log info.
-
+        - add spring-boot-starter-security in pom.xml then spring boot will automatically add security.
+        - then for login use username: user and password will be printed in log info.
+TODO: JWT-AUTHENTICATION IMPLEMENT
 
 
 Section 12: Thymeleaf
         - add spring-boot-starter-thymeleaf in pom.xml.
         - sending data (see HelloController.java)
         - sending object data (see HelloController.java)
+
+
+Section 13: Database Caching
+        - Spring boot uses third party cash providers like Hazel cast, EH cache, JBoss cache. Hazel cast is most popular.
+        - add spring-boot-starter-cache in pom.xml
+        - create ProductCacheConfig
+        - add @EnableCaching in main class that means here in this class above
+        - enable cache in ProductRestController class
+        - Product Model class implements Serializable
+
+        TODO: TEST CACHING...
+
+
+Section 14: Spring Batch
+        - A Batch is a bunch of task
+        - in properties file add:
+
+        spring.batch.jdbc.initialize-schema=always
+        spring.main.allow-circular-references=true
+
+        @EnableBatchProcessing
+
+        add: spring.batch.job.enabled=false in application.properties.
+
+        ::Task: Read CSV to Database: read row by row and convert it to object.
+
+        TODO: TEST FOR LARGE ZIP/VIDEO/AUDIO FILE
+        //https://stackoverflow.com/questions/36263965/processing-a-large-file-using-spring-batch
+
+
+Section 15: Unit Testing using MockMvc
+        -
+
+        TODO: ENUM IN JAVA
+
+        TODO: HOW TO MANAGE VERSION COMPATIBILITY FOR DIFFERENT THIRD PARTY LIBRARIES IN SPRING BOOT (POM.XML)
+
 
 
 

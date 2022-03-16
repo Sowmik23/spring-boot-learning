@@ -6,9 +6,18 @@ import com.sowmik.springboot_api.data_jpa.repository.StudentRepository;
 import com.sowmik.springboot_api.services.PaymentService;
 import com.sowmik.springboot_api.services.PaymentServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.JobParametersInvalidException;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
+import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
+import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +25,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class SowmikApplicationTests {
+
+    /*
+        These all are not unit testing...
+        These are integration test.
+
+     */
+
+
+
 
 
     //test here if our dependency injection works or not
@@ -56,8 +74,8 @@ class SowmikApplicationTests {
     private String baseUrl;
 
     @Test
-    public void testGetALlProduct(){
-        System.out.println(baseUrl);
+    public void testGetProduct(){
+       // System.out.println(baseUrl);
         RestTemplate restTemplate = new RestTemplate();
         Product product = restTemplate.getForObject(baseUrl+"6", Product.class);
         assertNotNull(product);
@@ -73,7 +91,7 @@ class SowmikApplicationTests {
         product.setDescription("Some description about this product...");
         product.setPrice(123212);
 
-        Product newProduct = restTemplate.postForObject(baseUrl, product, Product.class);
+        Product newProduct = restTemplate.postForObject("http://localhost:8090/api/products", product, Product.class);
 
         assertNotNull(newProduct);
         assertNotNull(newProduct.getId());
@@ -84,8 +102,28 @@ class SowmikApplicationTests {
     public void testUpdateProduct(){
         RestTemplate restTemplate = new RestTemplate();
         Product product = restTemplate.getForObject(baseUrl+"10", Product.class);
-        product.setName("ReactJs");
+        product.setName("JavaScript");
         restTemplate.put(baseUrl, product);
     }
+
+    @Autowired
+    JobLauncher launcher;
+
+    @Autowired
+    Job job;
+
+    @Test
+    public void testBatch() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
+        launcher.run(job, jobParameters);
+    }
+
+
+    @Test
+    public void testBatchConfigCSV() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
+        JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
+        launcher.run(job, jobParameters);
+    }
+
 
 }
