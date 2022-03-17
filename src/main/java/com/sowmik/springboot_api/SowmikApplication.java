@@ -15,7 +15,7 @@ import org.springframework.jms.annotation.EnableJms;
 @EnableCaching
 @EnableBatchProcessing
 @EnableJms
-@OpenAPIDefinition(info = @Info(title = "Test api for learing", version = "1.1."))
+@OpenAPIDefinition(info = @Info(title = "Test api for learing", version = "1.1.0"))
 public class SowmikApplication {
 
     public static void main(String[] args) {
@@ -191,7 +191,21 @@ Section 17: Swagger REST Documentation Quickstart
         - For other Swagger Annotations....
         - use @OpenAPIDefinition  in man method
 
-        -
+        - TODO: Advance configuration : read from Migration springfox documentation
+
+Section-18: Validations
+        - validation-api : implementation is provided by hibernate-validator
+        - use spring-boot-starter-validation(the only dependency we need to add in pom.xml
+        - Some validation annotations: @AssertFalse, @AssertTrue, @Past, @Future, @Max, @Min, @Size,
+        - @NotNull, @Pattern
+        - 1st step: add spring-boot-starter-validation in pom.xml
+        - 2nd step: ADD @Valid in ProductRestController
+        - 3rd step: goto Product Entity and and validation notations
+
+
+Section-19: REST File Upload and Download
+        - Just go through the fileupload package codes
+
 
  */
 
