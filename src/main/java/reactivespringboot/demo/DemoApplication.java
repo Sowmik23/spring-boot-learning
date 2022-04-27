@@ -48,4 +48,27 @@ public class DemoApplication {
          ## Use a consumer
          - testFluxWithConsumer()
 
+         ## Few more methods:
+         - delayElements(Durations....)
+         - Thread.sleep(time)
+         - Use ArrayList
+         - Use a Subscriber
+
+         ## Configure Batching
+         - see demoApplicationTests
+         - UseCase of Batching: Vaccine Provider
+
+         ## Spring Webflux
+         => spring boot starter web uses the servlet api internally. Spring boot starter webflux will not use the servlet api
+         => because servlet api is blocking. servlet api 3.1 is not blocking, but it is still not reactive. That is why
+         => spring boot starter webflux uses a container called netty. Netty is a container. It's not uses embedded tomcat.
+         => It is a reactive container.
+
+         ## Create a Reactive Rest API
+         - Vaccine Controller
+
+         Now if you run this application the server will be Netty server not Tomcat
+
+         ## Reactive Testing
+         -
  */
